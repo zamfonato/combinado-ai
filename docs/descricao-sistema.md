@@ -34,6 +34,8 @@ O PO e o stakeholder continuam trabalhando onde já trabalham. O Git fica atrás
 
 ## Escopo
 
+O sistema acompanha o requisito do início ao fim. Ele nasce na conversa entre PO e stakeholder, vira um arquivo aprovado, é referenciado pelos subcards do refinamento de negócio e pela especificação técnica, e toda mudança depois disso, venha do chat, do Figma ou de um novo entendimento do PO, passa pelo mesmo caminho de proposta e aprovação. O objetivo é dar visibilidade total ao que foi combinado, ao que mudou sem planejamento e ao que está parado esperando alguém.
+
 Dentro do escopo:
 
 - Capturar definições e mudanças de requisito vindas do board, de comentários, do Figma e de transcrições de reunião publicadas no chat.
@@ -41,6 +43,8 @@ Dentro do escopo:
 - Transformar cada mudança em uma alteração versionada em um arquivo de requisito, com a fonte de cada afirmação.
 - Pedir e registrar a aprovação de quem tem autoridade sobre a decisão.
 - Manter o card apontando para a versão aprovada do requisito.
+- Ligar os subcards do refinamento de negócio e a especificação técnica ao requisito de origem, e apontar quando a especificação diz algo diferente do requisito aprovado.
+- Marcar toda mudança que entra depois do início da implementação como não planejada, com autor, data e canal de origem, para que ela não vire um fix sem história.
 - Avisar o dev quando um requisito muda depois que a implementação começou.
 - Tornar visível o que está pendente: aprovações sem resposta, decisões sem fonte, mais de uma fonte de verdade, requisitos alterados após o início do desenvolvimento.
 

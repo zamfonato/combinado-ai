@@ -1,0 +1,76 @@
+sequenceDiagram
+    autonumber
+    actor Stake as Stakeholder (usuário)
+    actor PO as PO
+    participant Chat as Chat da empresa
+    participant Board as Board de tarefas
+    participant Adapt as Adaptadores
+    participant Orq as Orquestrador
+    participant Red as Agente redator
+    participant Gw as Gateway de modelos
+    participant Git as Repositório de código (requisitos/)
+    participant Reg as Registro de decisões
+    actor Dev as Dev / Tech lead
+
+    Note over Stake,PO: Reunião de levantamento. O PO cola a transcrição no canal do projeto.
+    PO->>Chat: Cola a transcrição da reunião
+    Chat->>Adapt: Webhook: mensagem nova no canal do projeto
+    Adapt->>Orq: Evento: transcrição recebida (projeto X)
+    Orq->>Adapt: Pedir lista de cards abertos do projeto
+    Adapt->>Board: Consulta cards abertos
+    Board-->>Adapt: Cards 1234, 1235, 1240 (título e resumo)
+    Orq->>Red: Triagem: transcrição + cards abertos
+    Red->>Gw: Chamada ao modelo
+    Gw-->>Red: Trechos atribuídos com confiança
+    Red-->>Orq: Trecho A -> card 1234 (certo); trecho B -> card 1240 (provável); trecho C -> nenhum card
+
+    Orq->>Adapt: Criar requisitos/1234-horas-extras.md com o trecho A e a fonte
+    Adapt->>Git: Cria arquivo e abre MR "requisito: 1234"
+    Orq->>Adapt: Comentar no card 1234 com o link do arquivo e do MR
+    Adapt->>Board: Comentário no card 1234
+    Orq->>Reg: Estado 1234: proposto, aguardando aprovação do stakeholder
+
+    alt Trecho B: provável
+        Orq->>Adapt: Perguntar ao PO no card 1240 se o trecho B é deste card
+        Adapt->>Board: Comentário no card 1240
+        PO->>Board: Confirma
+        Board->>Adapt: Webhook: resposta do PO
+        Adapt->>Orq: Evento: atribuição confirmada
+        Orq->>Reg: Grava confirmação (PO, data, card)
+    end
+
+    alt Trecho C: sem card
+        Orq->>Adapt: Perguntar ao PO no chat: pedido novo ou descarte?
+        Adapt->>Chat: Mensagem ao PO com o trecho C
+        PO->>Chat: Responde que é pedido novo
+        Orq->>Adapt: Criar card e arquivo de requisito para o trecho C
+    end
+
+    Orq->>Adapt: Pedir ao stakeholder que confirme o requisito 1234
+    Adapt->>Chat: Na reunião foi combinado X. Confirma?
+    Stake->>Chat: Aprova
+    Chat->>Adapt: Webhook: resposta do stakeholder
+    Adapt->>Orq: Evento: aprovação
+    Orq->>Reg: Grava aprovação (stakeholder, data, canal, trecho A como fonte)
+    Orq->>Adapt: Aplicar MR
+    Adapt->>Git: Merge em main
+    Orq->>Reg: Estado 1234: aprovado e aplicado
+
+    Note over PO,Dev: Refinamento de negócio. Devs quebram o card 1234 em subcards.
+    Dev->>Board: Cria subcards 1234-front e 1234-back
+    Board->>Adapt: Webhook: subcards criados
+    Adapt->>Orq: Evento: subcards do 1234
+    Orq->>Adapt: Escrever nos subcards o link do requisito 1234
+    Adapt->>Board: Comentário nos subcards
+
+    Note over Dev,Git: Refinamento técnico. A spec do Spec Kit referencia o requisito.
+    Dev->>Git: Commit da spec 1234 em specs/
+    Git->>Adapt: Webhook: spec alterada
+    Adapt->>Orq: Evento: spec do 1234 mudou
+    Orq->>Red: Comparar spec com requisito aprovado
+    Red->>Gw: Chamada ao modelo
+    Gw-->>Red: Divergência: spec diz formato decimal, requisito diz HH:MM
+    Red-->>Orq: Divergência encontrada com trecho e linha
+    Orq->>Adapt: Comentar no card 1234 e avisar o tech lead
+    Adapt->>Board: Comentário com a divergência
+    Orq->>Reg: Pendência: divergência spec x requisito, responsável tech lead

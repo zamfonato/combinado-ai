@@ -1,0 +1,75 @@
+sequenceDiagram
+    autonumber
+    actor Stake as Stakeholder (usuário)
+    actor PO as PO
+    actor Ger as Gerência
+    participant Chat as Chat da empresa
+    participant Figma as Figma (via MCP)
+    participant Board as Board de tarefas
+    participant Adapt as Adaptadores
+    participant Orq as Orquestrador
+    participant Red as Agente redator
+    participant Gw as Gateway de modelos
+    participant Git as Repositório de código (requisitos/)
+    participant Reg as Registro de decisões
+    actor Dev as Dev
+
+    Note over Stake,Dev: O card 1234 já está em implementação. O requisito aprovado diz horas em HH:MM.
+
+    alt Pedido tardio no chat
+        Stake->>Chat: A tela de horas precisa de uma coluna de saldo
+        Chat->>Adapt: Webhook: mensagem no canal do projeto
+        Adapt->>Orq: Evento: possível mudança de requisito
+    else Mudança tardia no Figma
+        Figma-->>Gw: MCP: tela do card 1234 alterada (coluna nova)
+        Gw-->>Red: Notificação de mudança de tela
+        Red-->>Orq: Evento: tela do 1234 diverge do requisito
+    end
+
+    Orq->>Adapt: Pedir lista de cards abertos do projeto
+    Adapt->>Board: Consulta
+    Board-->>Adapt: Cards abertos
+    Orq->>Red: Identificar o card e propor a mudança
+    Red->>Gw: Chamada ao modelo (e leitura da tela via MCP)
+    Gw-->>Red: Card 1234; proposta: nova coluna de saldo; fonte: mensagem do stakeholder
+    Red-->>Orq: Proposta de mudança no requisitos/1234-horas-extras.md
+
+    alt Não bate com nenhum card aberto
+        Orq->>Adapt: Perguntar ao PO: card novo ou descarte?
+        Adapt->>Chat: Mensagem ao PO
+        Note over Orq: Nada é criado nem aplicado até o PO responder.
+    end
+
+    Orq->>Adapt: Abrir MR "requisito: 1234" com a mudança e a fonte
+    Adapt->>Git: Abre MR
+    Orq->>Reg: Estado 1234: mudança proposta após início da implementação (não planejada)
+    Orq->>Adapt: Pedir aprovação do PO (regra de negócio) e confirmação do stakeholder
+    Adapt->>Board: Comentário no card 1234 com o link do MR
+    Adapt->>Chat: Você pediu uma coluna de saldo no card 1234. Confirma?
+    Stake->>Chat: Confirma
+    Orq->>Reg: Grava confirmação do stakeholder
+
+    alt PO não responde no prazo
+        Orq->>Reg: Pendência vencida: aprovação do PO, card 1234
+        Orq->>Adapt: Lembrete ao PO no card
+        Adapt->>Board: Comentário de lembrete
+        Note over Orq: Prazo vence de novo.
+        Orq->>Adapt: Escalar para a gerência com o histórico
+        Adapt->>Chat: Mensagem à gerência: pendência do PO há N dias, card 1234
+        Ger->>Chat: Cobra o PO
+        Note over Orq,Git: A mudança segue sem aplicar. O card mostra mudança pendente de aprovação.
+    else PO aprova no prazo
+        PO->>Board: Aprova no card
+        Board->>Adapt: Webhook
+        Adapt->>Orq: Evento: aprovação do PO
+        Orq->>Reg: Grava aprovação (PO, data, canal, fonte)
+        Orq->>Adapt: Aplicar MR
+        Adapt->>Git: Merge em main
+        Orq->>Adapt: Atualizar card 1234: nova versão, marcada como mudança não planejada
+        Adapt->>Board: Comentário no card com o diff e o autor do pedido
+        Orq->>Adapt: Marcar a spec do 1234 como desatualizada
+        Adapt->>Board: Comentário nos subcards e pendência para o tech lead revisar a spec
+        Orq->>Adapt: Avisar o dev
+        Adapt->>Chat: Mensagem ao dev: requisito do 1234 mudou depois do início, veja o diff
+        Dev->>Git: Lê o requisito atualizado com seu agente
+    end
