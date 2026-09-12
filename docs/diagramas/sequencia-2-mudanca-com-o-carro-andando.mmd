@@ -15,6 +15,7 @@ sequenceDiagram
     actor Dev as Dev
 
     Note over Stake,Dev: O card 1234 já está em implementação. O requisito aprovado diz horas em HH:MM.
+    Note over Adapt,Orq: O Observador de fontes fica entre Adaptadores e Orquestrador. Foi omitido aqui para simplificar a leitura.
 
     alt Pedido tardio no chat
         Stake->>Chat: A tela de horas precisa de uma coluna de saldo

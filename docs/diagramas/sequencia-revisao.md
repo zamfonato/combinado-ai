@@ -19,15 +19,17 @@ Um cobre o requisito nascendo (reunião com o stakeholder até o refinamento té
 
 ## Checklist de revisão
 
-1. [ ] Cada diagrama cobre um caminho de sucesso e pelo menos um caminho de falha.
-2. [ ] Em cada falha está claro que nada é aplicado sem aprovação.
-3. [ ] Toda chamada a modelo passa pelo gateway; nenhum outro participante fala com modelo.
-4. [ ] Toda escrita para fora (card, MR, chat) sai do orquestrador pelos adaptadores.
-5. [ ] Toda aprovação e toda pendência são gravadas no registro de decisões, com quem, quando e canal.
-6. [ ] A mudança tardia fica marcada como não planejada e aparece no card com autor e origem.
-7. [ ] O dev é avisado quando o requisito muda depois do início da implementação.
-8. [ ] A spec e os subcards ficam ligados ao requisito e são marcados quando ele muda.
-9. [ ] O escalonamento para a gerência acontece só depois de prazo vencido e lembrete.
-10. [ ] Os participantes usam os mesmos nomes do diagrama de containers.
-11. [ ] Nenhum número de prazo foi inventado; o prazo é definido por projeto.
-12. [ ] As suposições acima estão de acordo com o esclarecimento.
+Revisado em 12/09/2026. Itens conferidos contra os dois diagramas; correções aplicadas no mesmo commit.
+
+1. [x] Cada diagrama cobre um caminho de sucesso e pelo menos um caminho de falha. No diagrama 1 as falhas são de ambiguidade (trecho provável, trecho sem card); a falha de prazo está só no diagrama 2, para não repetir.
+2. [x] Em cada falha está claro que nada é aplicado sem aprovação.
+3. [x] Toda chamada a modelo passa pelo gateway; nenhum outro participante fala com modelo.
+4. [x] Toda escrita para fora (card, MR, chat) sai do orquestrador pelos adaptadores.
+5. [x] Toda aprovação e toda pendência são gravadas no registro de decisões, com quem, quando e canal. Correção: no diagrama 1 faltava gravar a decisão do PO sobre o trecho sem card; incluído.
+6. [x] A mudança tardia fica marcada como não planejada e aparece no card com autor e origem.
+7. [x] O dev é avisado quando o requisito muda depois do início da implementação.
+8. [x] A spec e os subcards ficam ligados ao requisito e são marcados quando ele muda.
+9. [x] O escalonamento para a gerência acontece só depois de prazo vencido e lembrete.
+10. [x] Os participantes usam os mesmos nomes do diagrama de containers. Correção: o Observador de fontes não aparecia; foi omitido de propósito para simplificar e agora há uma nota dizendo isso nos dois diagramas.
+11. [x] Nenhum número de prazo foi inventado; o prazo é definido por projeto.
+12. [x] As suposições acima estão de acordo com o esclarecimento.

@@ -13,6 +13,7 @@ sequenceDiagram
     actor Dev as Dev / Tech lead
 
     Note over Stake,PO: Reunião de levantamento. O PO cola a transcrição no canal do projeto.
+    Note over Adapt,Orq: O Observador de fontes fica entre Adaptadores e Orquestrador. Foi omitido aqui para simplificar a leitura.
     PO->>Chat: Cola a transcrição da reunião
     Chat->>Adapt: Webhook: mensagem nova no canal do projeto
     Adapt->>Orq: Evento: transcrição recebida (projeto X)
@@ -44,6 +45,7 @@ sequenceDiagram
         Adapt->>Chat: Mensagem ao PO com o trecho C
         PO->>Chat: Responde que é pedido novo
         Orq->>Adapt: Criar card e arquivo de requisito para o trecho C
+        Orq->>Reg: Grava decisão do PO (pedido novo, data, canal)
     end
 
     Orq->>Adapt: Pedir ao stakeholder que confirme o requisito 1234
