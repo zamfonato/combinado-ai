@@ -12,7 +12,7 @@ C4Container
     System_Ext(llm, "Provedores de modelo", "Claude, OpenAI e outros")
 
     System_Boundary(c1, "Combinado.ai") {
-        Container(adaptadores, "Adaptadores", "Um por ferramenta", "Traduzem board, Git, chat e pasta de transcrições para eventos e comandos comuns")
+        Container(adaptadores, "Adaptadores", "Um por ferramenta", "Traduzem board, Git e chat para eventos e comandos comuns")
         Container(observador, "Observador de fontes", "Serviço", "Recebe webhooks dos adaptadores. Detecta mudança, não interpreta")
         Container(orquestrador, "Orquestrador", "Serviço", "Máquina de estados do requisito: proposto, aguardando aprovação, aprovado, aplicado. Controla prazos e escalonamento")
         Container(redator, "Agente redator", "Runtime de agente", "Único que usa modelo de linguagem. Escreve propostas citando a fonte, faz triagem de transcrições entre os cards abertos, compara tela com requisito, devolve perguntas quando não tem certeza")

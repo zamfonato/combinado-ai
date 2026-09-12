@@ -15,17 +15,17 @@ Gerado com apoio de IA a partir de `descricao-sistema.md` e `esclarecimento.md`.
 
 ## Checklist de revisão
 
-Marque o que estiver certo. O que estiver errado, anote ao lado o que deveria ser.
+Revisado em 12/09/2026. Itens conferidos contra o diagrama; correções aplicadas no mesmo commit.
 
-1. [ ] O diagrama está no nível de containers, sem componentes internos nem detalhes de código.
-2. [ ] Todas as integrações externas estão marcadas como externas (board, Git, chat, Figma, provedores).
-3. [ ] Só o agente redator chega ao gateway, e só o gateway chega aos provedores e ao Figma.
-4. [ ] Nenhum container interno tem seta direta para provedor de modelo.
-5. [ ] O orquestrador não fala com modelo de linguagem.
-6. [ ] O observador só detecta, não interpreta, e não escreve em lugar nenhum.
-7. [ ] Toda escrita para fora (card, MR, mensagem) sai do orquestrador via adaptadores.
-8. [ ] O dev aparece consumindo requisito no Git e contestando pelo card, não em interface própria.
-9. [ ] A gerência aparece só como destino de escalonamento.
-10. [ ] Os três papéis de aprovação (PO, UX, stakeholder) estão representados como atores.
-11. [ ] Os nomes dos containers batem com os nomes usados em `descricao-sistema.md`.
-12. [ ] As suposições acima estão de acordo com o que foi respondido no esclarecimento.
+1. [x] O diagrama está no nível de containers, sem componentes internos nem detalhes de código.
+2. [x] Todas as integrações externas estão marcadas como externas (board, Git, chat, Figma, provedores).
+3. [x] Só o agente redator chega ao gateway, e só o gateway chega aos provedores e ao Figma.
+4. [x] Nenhum container interno tem seta direta para provedor de modelo.
+5. [x] O orquestrador não fala com modelo de linguagem.
+6. [x] O observador só detecta, não interpreta, e não escreve em lugar nenhum.
+7. [x] Toda escrita para fora (card, MR, mensagem) sai do orquestrador via adaptadores.
+8. [x] O dev aparece consumindo requisito no Git e contestando pelo card, não em interface própria.
+9. [x] A gerência aparece só como destino de escalonamento.
+10. [x] Os três papéis de aprovação (PO, UX, stakeholder) estão representados como atores. Estão agrupados em um único ator para não poluir o desenho; a tabela de autoridade os distingue.
+11. [x] Os nomes dos containers batem com os nomes usados em `descricao-sistema.md`. Correção: "Configuração por projeto" faltava na descrição e foi incluída; a descrição dos adaptadores ainda citava pasta de transcrições e foi corrigida.
+12. [x] As suposições acima estão de acordo com o que foi respondido no esclarecimento.

@@ -63,6 +63,7 @@ Diagrama de containers, no estilo do C4 Model, e um diagrama de sequência da jo
 - Gateway de modelos: ponto único por onde toda chamada a modelo de linguagem passa. Controla qual modelo é usado, quanto custa e quem pode chamar.
 - Registro de decisões: guarda quem aprovou o quê, quando, por qual canal e com base em qual fonte. É o histórico que responde à pergunta "quem combinou isso".
 - Adaptadores: traduzem o board, o Git e o chat da empresa para uma interface comum. Trocar de ferramenta significa trocar o adaptador, não o sistema.
+- Configuração por projeto: arquivos versionados com a tabela de autoridade (quem aprova o quê), os prazos, as ferramentas e os adaptadores de cada projeto. Mudar uma regra também deixa histórico.
 - Repositório de requisitos: pasta `requisitos/` dentro do repositório de código do projeto, com um arquivo Markdown por card, versionado em Git. É a fonte de verdade do requisito e fica onde o agente do dev já lê. Quando a permissão exigir (por exemplo, cliente que aprova requisito mas não pode ver código), a configuração do projeto pode apontar para um repositório separado.
 
 ## Integrações externas
