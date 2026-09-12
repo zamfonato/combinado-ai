@@ -2,35 +2,53 @@
 
 ## O problema
 
-Em um time de desenvolvimento, o trabalho do dev deixa rastro sozinho. Cada mudança vira commit, cada entrega vira merge request, cada erro aparece em teste ou em produção. O trabalho de quem define o que o sistema deve fazer não deixa esse rastro. O pedido nasce em reunião, muda em conversa, é anotado em um card e refinado em um documento. Essas fontes nem sempre dizem a mesma coisa e ninguém é dono de mantê-las alinhadas.
+Em um time de desenvolvimento, o trabalho do dev deixa rastro sozinho. Cada mudança vira um commit, cada entrega vira merge request a ser avaliado, cada erro aparece em teste ou em produção. 
 
-O resultado é conhecido. O card diz uma coisa e a especificação diz outra. O que foi combinado em reunião não foi anotado. Uma decisão muda no meio do caminho e o dev descobre tarde. O testador valida um documento que já não é verdade. Quando alguém pergunta quem decidiu o quê e quando, a resposta depende da memória das pessoas.
+O trabalho de quem define o que o sistema deve fazer muitas vezes não deixa esse rastro algum. 
 
-Não é falta de método. Métodos como o Spec Kit ajudam a manter a especificação consistente por dentro. O que falta é um elo entre a especificação e o lugar onde as pessoas realmente combinam as coisas: o board, o chat e a reunião.
+O pedido nasce em reunião, muda em conversa, é anotado em um card e refinado em um documento. Essas fontes nem sempre dizem a mesma coisa e ninguém está efetivamente deixando tudo sincronizado e coerente.
+
+O resultado é conhecido. O card diz uma coisa e a especificação diz outra. O que foi combinado em reunião não foi anotado porque era detalhe demais ou esqueceu. 
+
+Uma decisão muda no meio do caminho e o dev descobre tarde demais ou precisa refazer o seu trabalho. 
+
+O testador valida um documento que já não é verdade, está defasado. 
+
+Quando alguém pergunta quem decidiu o quê e quando, a resposta depende da memória das pessoas. Quando existe essa preocupação.
+
+Não é falta de método. Métodos como o Spec Kit ajudam a manter a especificação consistente por dentro. O que falta é um elo entre a especificação e o lugar onde as pessoas realmente combinam as coisas: o board, o chat o versionamento, o figma e a reunião.
 
 ## A proposta
 
-O Combinado.ai é um colaborador de IA que trata o requisito como se fosse código. Ele acompanha o board, o repositório e as conversas que o time decide compartilhar com ele. Quando alguém define ou muda um requisito, ele escreve essa mudança em um arquivo Markdown versionado, abre uma proposta de alteração e pede aprovação para quem tem autoridade sobre aquele tipo de decisão. A aprovação acontece no canal da pessoa, por exemplo um comentário no card. O sistema registra quem aprovou, quando e com base em quê, e só então aplica a mudança.
+O Combinado.ai é um colaborador de IA que trata o requisito como se fosse código. 
 
-O PO e o stakeholder continuam trabalhando onde já trabalham. O Git fica atrás deles, não na frente. O dev passa a consumir requisitos com histórico, versão e aprovação, do mesmo jeito que consome código.
+Ele acompanha o board, o repositório, o figma e as conversas que o time decide compartilhar com ele. 
+
+Reunições precisam ser transcritas e entrar como insumo. Uma reunião sem uma transcrição é tempo jogado no lixo.
+
+Quando alguém define ou muda um requisito, precisa que tal ocorra também arquivo Markdown versionado, abre uma proposta de alteração e pede aprovação para quem tem autoridade sobre aquele tipo de decisão. 
+
+A aprovação acontece no canal da pessoa, por exemplo um comentário no card. O sistema registra quem aprovou, quando e com base em quê, e só então aplica a mudança.
+
+O PO e o stakeholder continuam trabalhando onde já trabalham. O Git fica atrás deles, não na frente. O dev passa a consumir requisitos com histórico verificável, versão e aprovação, do mesmo jeito que acontece no código.
 
 ## Escopo
 
 Dentro do escopo:
 
-- Capturar definições e mudanças de requisito vindas do board, de comentários e de atas de reunião.
+- Capturar definições e mudanças de requisito vindas do board, de comentários e de atas de reunião transcrita.
 - Transformar cada mudança em uma alteração versionada em um arquivo de requisito, com a fonte de cada afirmação.
 - Pedir e registrar a aprovação de quem tem autoridade sobre a decisão.
 - Manter o card apontando para a versão aprovada do requisito.
 - Avisar o dev quando um requisito muda depois que a implementação começou.
-- Tornar visível o que está pendente: aprovações sem resposta, decisões sem fonte, requisitos alterados após o início do desenvolvimento.
+- Tornar visível o que está pendente: aprovações sem resposta, decisões sem fonte, mais de uma fonte de verdade, requisitos alterados após o início do desenvolvimento.
 
 Fora do escopo:
 
-- Não é um board nem um gerenciador de tarefas. Ele se integra ao que a empresa já usa.
+- Não é um board nem um gerenciador de tarefas. Ele se integra ao que a empresa já usa. "Jira", "Azure Board", etc
 - Não gera código nem refina a solução técnica.
 - Não decide conflitos. Quando duas fontes divergem, ele pergunta a quem tem autoridade e registra a resposta.
-- Não substitui a reunião. Ele registra o que saiu dela.
+- Não substitui a reunião. Ele consome o que saiu textualmente dela e registra.
 
 ## Nível da visão
 
@@ -38,7 +56,7 @@ Diagrama de containers, no estilo do C4 Model, e um diagrama de sequência da jo
 
 ## Limites e responsabilidades
 
-- Observador de fontes: fica de olho no board, no repositório de requisitos e nas conversas compartilhadas. Detecta que algo mudou e entrega para o orquestrador. Não interpreta conteúdo.
+- Observador de fontes: fica de olho no board, no repositório de requisitos, no figma correspondente e nas conversas/textos compartilhadas. Detecta que algo mudou e entrega para o orquestrador. Não interpreta conteúdo.
 - Orquestrador: guarda o estado de cada requisito (proposto, aguardando aprovação, aprovado, aplicado) e decide o próximo passo. Não fala com modelo de linguagem diretamente.
 - Agente redator: recebe o conteúdo capturado e escreve a proposta de mudança no arquivo de requisito, citando a fonte. É o único que conversa com o modelo de linguagem.
 - Gateway de modelos: ponto único por onde toda chamada a modelo de linguagem passa. Controla qual modelo é usado, quanto custa e quem pode chamar.
@@ -50,7 +68,7 @@ Diagrama de containers, no estilo do C4 Model, e um diagrama de sequência da jo
 
 - Board de tarefas (Azure Boards, Jira, GitLab Issues ou similar): leitura de cards e comentários, escrita de comentários e de links.
 - Repositório Git (GitLab, GitHub ou similar): leitura e escrita dos arquivos de requisito, abertura de propostas de alteração.
-- Chat da empresa (Teams, Slack ou similar): leitura de mensagens em canais compartilhados e envio de pedidos de aprovação.
+- Chat da empresa (Teams, Slack ou similar): leitura de mensagens em canais compartilhados dedicados a esta integração.
 - Provedores de modelo de linguagem (via gateway): geração dos textos de proposta.
 - Transcrição de reunião: recebida como arquivo ou texto anexado ao card. O sistema não grava reunião.
 
@@ -62,7 +80,7 @@ Diagrama de containers, no estilo do C4 Model, e um diagrama de sequência da jo
 - O conteúdo de cards, comentários e atas é tratado como dado, não como instrução para o agente.
 - O sistema só lê as conversas que o time compartilhou de forma explícita. Não tem acesso a mensagens privadas.
 - Dados de clientes e informações sensíveis que apareçam nas fontes não podem ser copiados para os arquivos de requisito nem para logs.
-- Toda ação irreversível (aplicar mudança, fechar proposta, alterar card) fica registrada com autor, data e fonte.
+- Toda ação irreversível (aplicar mudança, fechar proposta, alterar card) fica registrada com autor, data e fonte, rastreabilidade total.
 
 ## Lacunas
 
