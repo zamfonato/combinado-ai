@@ -11,6 +11,7 @@ Gerado com apoio de IA a partir de `descricao-sistema.md` e `esclarecimento.md`.
 5. O orquestrador é quem controla prazos e escalonamento, porque ele já guarda o estado de cada requisito. Não existe um serviço separado de "cobrança".
 6. O gateway de modelos concentra tanto as chamadas a modelo quanto as chamadas a MCP. É o único ponto com credencial externa de IA.
 7. Não há interface própria. Toda saída para pessoas passa por board, chat ou Git.
+8. O requisito vive na pasta `requisitos/` do repositório de código do projeto, não em repositório separado, para ficar no contexto que o agente do dev já lê. Repositório separado só quando a permissão exigir (decisão a registrar em ADR).
 
 ## Checklist de revisão
 

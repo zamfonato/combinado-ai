@@ -62,12 +62,12 @@ Diagrama de containers, no estilo do C4 Model, e um diagrama de sequência da jo
 - Gateway de modelos: ponto único por onde toda chamada a modelo de linguagem passa. Controla qual modelo é usado, quanto custa e quem pode chamar.
 - Registro de decisões: guarda quem aprovou o quê, quando, por qual canal e com base em qual fonte. É o histórico que responde à pergunta "quem combinou isso".
 - Adaptadores: traduzem o board, o Git e o chat da empresa para uma interface comum. Trocar de ferramenta significa trocar o adaptador, não o sistema.
-- Repositório de requisitos: arquivos Markdown, um por feature, versionados em Git. É a fonte de verdade do requisito.
+- Repositório de requisitos: pasta `requisitos/` dentro do repositório de código do projeto, com um arquivo Markdown por card, versionado em Git. É a fonte de verdade do requisito e fica onde o agente do dev já lê. Quando a permissão exigir (por exemplo, cliente que aprova requisito mas não pode ver código), a configuração do projeto pode apontar para um repositório separado.
 
 ## Integrações externas
 
 - Board de tarefas (Azure Boards, Jira, GitLab Issues ou similar): leitura de cards e comentários, escrita de comentários e de links.
-- Repositório Git (GitLab, GitHub ou similar): leitura e escrita dos arquivos de requisito, abertura de propostas de alteração.
+- Repositório Git do projeto (GitLab, GitHub ou similar): leitura e escrita dos arquivos em `requisitos/`, abertura e aplicação de merge requests de requisito, identificados por prefixo ou label.
 - Chat da empresa (Teams, Slack ou similar): leitura de mensagens em canais compartilhados dedicados a esta integração.
 - Provedores de modelo de linguagem (via gateway): geração dos textos de proposta.
 - Transcrição de reunião: recebida como arquivo ou texto anexado ao card. O sistema não grava reunião.
@@ -94,3 +94,4 @@ Pontos que ainda não foram decididos. Um agente que for implementar este sistem
 - Como ligar um card ao arquivo de requisito correspondente. Identificador no título, campo no card ou convenção de nome.
 - Quanto de contexto o agente redator recebe. Só a mudança, ou o arquivo inteiro e o histórico.
 - Quais métricas serão expostas e para quem.
+- Projeto com front e back em repositórios separados: em qual deles fica a pasta `requisitos/`.

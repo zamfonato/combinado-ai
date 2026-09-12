@@ -55,7 +55,7 @@ Identificador no título do card, campo no card, link, ou o sistema cria o arqui
 
 Resposta: Pelo identificador do card. Todo board dá um identificador único para cada tarefa, e ele é fácil de filtrar em qualquer ferramenta. O arquivo de requisito leva esse identificador no nome (por exemplo, `1234-horas-extras.md`) e no cabeçalho. 
 
-O sistema cria o arquivo quando o card entra em refinamento e escreve no card o link para o arquivo no repositório Git (GitLab, GitHub). 
+O sistema cria o arquivo quando o card entra em refinamento e escreve no card o link para o arquivo na pasta `requisitos/` do repositório de código do projeto (GitLab, GitHub). 
 
 Esse link aponta sempre para a versão aprovada, na branch principal, e o histórico do Git mostra todas as mudanças anteriores. Enquanto existe uma proposta de mudança em aberto, o sistema deixa no card um segundo link, para o merge request pendente. 
 

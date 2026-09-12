@@ -6,7 +6,7 @@ C4Container
     Person(gestao, "Gerência", "Recebe escalonamentos e resumo de pendências")
 
     System_Ext(board, "Board de tarefas", "Azure Boards, Jira, GitLab Issues")
-    System_Ext(git, "Repositório Git da empresa", "GitLab, GitHub")
+    System_Ext(git, "Repositório de código do projeto", "GitLab, GitHub. Pasta requisitos/ com um arquivo por card")
     System_Ext(chat, "Chat da empresa", "Teams, Slack")
     System_Ext(figma, "Figma", "Telas e comentários, via MCP")
     System_Ext(llm, "Provedores de modelo", "Claude, OpenAI e outros")
@@ -25,7 +25,7 @@ C4Container
     Rel(po, board, "Cria cards, comenta, aprova")
     Rel(po, chat, "Responde pedidos de aprovação")
     Rel(po, figma, "Desenha e comenta telas")
-    Rel(dev, git, "Lê requisitos aprovados")
+    Rel(dev, git, "Lê requisitos/ junto do código, com seu agente")
     Rel(dev, board, "Contesta pelo card")
     Rel(gestao, chat, "Recebe escalonamentos")
 
@@ -42,6 +42,6 @@ C4Container
     Rel(gateway, figma, "MCP")
     Rel(orquestrador, registro, "Grava estado, aprovação e pendência")
     Rel(orquestrador, adaptadores, "Comando: comentar no card, abrir MR, enviar mensagem")
-    Rel(adaptadores, git, "Cria arquivo, abre e aplica merge request")
+    Rel(adaptadores, git, "Cria arquivo em requisitos/, abre e aplica MR com label requisito")
     Rel(adaptadores, board, "Comenta e escreve links")
     Rel(adaptadores, chat, "Envia pedidos, lembretes e escalonamentos")
