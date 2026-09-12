@@ -108,7 +108,7 @@ sequenceDiagram
     Orq->>Red: Triagem: transcrição + cards abertos
     Red->>Gw: Chamada ao modelo
     Gw-->>Red: Trechos atribuídos com confiança
-    Red-->>Orq: Trecho A -> card 1234 (certo); trecho B -> card 1240 (provável); trecho C -> nenhum card
+    Red-->>Orq: Trecho A é do card 1234 (certo), trecho B é do card 1240 (provável), trecho C não tem card
 
     Orq->>Adapt: Criar requisitos/1234-horas-extras.md com o trecho A e a fonte
     Adapt->>Git: Cria arquivo e abre MR "requisito: 1234"
@@ -204,7 +204,7 @@ sequenceDiagram
     Board-->>Adapt: Cards abertos
     Orq->>Red: Identificar o card e propor a mudança
     Red->>Gw: Chamada ao modelo (e leitura da tela via MCP)
-    Gw-->>Red: Card 1234; proposta: nova coluna de saldo; fonte: mensagem do stakeholder
+    Gw-->>Red: Card 1234, proposta de nova coluna de saldo, fonte é a mensagem do stakeholder
     Red-->>Orq: Proposta de mudança no requisitos/1234-horas-extras.md
 
     alt Não bate com nenhum card aberto
