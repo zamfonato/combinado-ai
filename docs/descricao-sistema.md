@@ -26,7 +26,7 @@ Ele acompanha o board, o repositório, o figma e as conversas que o time decide 
 
 Reunições precisam ser transcritas e entrar como insumo. Uma reunião sem uma transcrição é tempo jogado no lixo.
 
-Quando alguém define ou muda um requisito, precisa que tal ocorra também arquivo Markdown versionado, abre uma proposta de alteração e pede aprovação para quem tem autoridade sobre aquele tipo de decisão. 
+Quando alguém define ou muda um requisito, essa mudança precisa acontecer também no arquivo Markdown versionado. O sistema abre uma proposta de alteração e pede aprovação para quem tem autoridade sobre aquele tipo de decisão. 
 
 A aprovação acontece no canal da pessoa, por exemplo um comentário no card. O sistema registra quem aprovou, quando e com base em quê, e só então aplica a mudança.
 
