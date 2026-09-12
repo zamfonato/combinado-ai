@@ -1,0 +1,47 @@
+C4Container
+    title Combinado.ai - Visão de Containers (C4, nível 2)
+
+    Person(po, "PO / Stakeholder / UX", "Define e aprova requisitos no board, no chat e no Figma")
+    Person(dev, "Dev / Tech lead", "Consome requisitos no Git e contesta pelo card")
+    Person(gestao, "Gerência", "Recebe escalonamentos e resumo de pendências")
+
+    System_Ext(board, "Board de tarefas", "Azure Boards, Jira, GitLab Issues")
+    System_Ext(git, "Repositório Git da empresa", "GitLab, GitHub")
+    System_Ext(chat, "Chat da empresa", "Teams, Slack")
+    System_Ext(figma, "Figma", "Telas e comentários, via MCP")
+    System_Ext(llm, "Provedores de modelo", "Claude, OpenAI e outros")
+    System_Ext(transcricao, "Transcrições de reunião", "Arquivos depositados em pasta compartilhada")
+
+    System_Boundary(c1, "Combinado.ai") {
+        Container(adaptadores, "Adaptadores", "Um por ferramenta", "Traduzem board, Git, chat e pasta de transcrições para eventos e comandos comuns")
+        Container(observador, "Observador de fontes", "Serviço", "Recebe webhooks e faz consultas periódicas. Detecta mudança, não interpreta")
+        Container(orquestrador, "Orquestrador", "Serviço", "Máquina de estados do requisito: proposto, aguardando aprovação, aprovado, aplicado. Controla prazos e escalonamento")
+        Container(redator, "Agente redator", "Runtime de agente", "Único que usa modelo de linguagem. Escreve propostas citando a fonte, compara tela com requisito, devolve perguntas quando o texto é ambíguo")
+        Container(gateway, "Gateway de modelos", "Proxy", "Ponto único de saída para modelos e MCPs. Controla modelo, custo e permissão")
+        ContainerDb(registro, "Registro de decisões", "Banco relacional", "Quem aprovou o quê, quando, por qual canal e com base em qual fonte. Pendências e prazos")
+        ContainerDb(config, "Configuração por projeto", "Arquivos versionados", "Tabela de autoridade, prazos, ferramentas e adaptadores de cada projeto")
+    }
+
+    Rel(po, board, "Cria cards, comenta, aprova")
+    Rel(po, chat, "Responde pedidos de aprovação")
+    Rel(po, figma, "Desenha e comenta telas")
+    Rel(dev, git, "Lê requisitos aprovados")
+    Rel(dev, board, "Contesta pelo card")
+    Rel(gestao, chat, "Recebe escalonamentos")
+
+    Rel(board, adaptadores, "Webhook")
+    Rel(git, adaptadores, "Webhook")
+    Rel(chat, adaptadores, "Webhook")
+    Rel(adaptadores, transcricao, "Consulta periódica")
+    Rel(adaptadores, observador, "Evento comum")
+    Rel(observador, orquestrador, "Mudança detectada")
+    Rel(orquestrador, config, "Lê autoridade e prazos")
+    Rel(orquestrador, redator, "Pede proposta ou comparação")
+    Rel(redator, gateway, "Chamada a modelo e a MCP")
+    Rel(gateway, llm, "HTTPS")
+    Rel(gateway, figma, "MCP")
+    Rel(orquestrador, registro, "Grava estado, aprovação e pendência")
+    Rel(orquestrador, adaptadores, "Comando: comentar no card, abrir MR, enviar mensagem")
+    Rel(adaptadores, git, "Cria arquivo, abre e aplica merge request")
+    Rel(adaptadores, board, "Comenta e escreve links")
+    Rel(adaptadores, chat, "Envia pedidos, lembretes e escalonamentos")
