@@ -104,3 +104,5 @@ Pontos que ainda não foram decididos. Um agente que for implementar este sistem
 - Como o sistema sabe a qual projeto uma transcrição pertence. Provavelmente um canal por projeto.
 - Qual o limite entre "certo" e "provável" na triagem de transcrições, e quantas perguntas o PO aceita receber por reunião.
 - O que fazer com trecho de reunião que menciona um card já fechado.
+- O formato dos eventos comuns que os adaptadores produzem e dos comandos que recebem.
+- Como o sistema fica sabendo que uma tela do Figma mudou, já que o Figma não oferece webhook para isso.
