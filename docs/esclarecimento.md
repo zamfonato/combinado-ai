@@ -34,7 +34,9 @@ Resposta: Existe prazo, definido por projeto (por exemplo, dois dias úteis). Ao
 **3. Reunião sem transcrição: o sistema faz alguma coisa?**
 Por exemplo, registra que a reunião aconteceu sem ata e deixa isso visível como pendência de quem organizou.
 
-Resposta: Sim. Se um card ou uma decisão fizer referência a uma reunião e a transcrição não entrar no sistema, isso vira uma pendência de quem organizou a reunião, com o mesmo prazo e escalonamento das aprovações. Decisão de reunião sem transcrição não é aceita como fonte.
+Resposta: Sim. A transcrição entra pelo chat, em um canal compartilhado com o sistema. Uma reunião mistura vários assuntos, então o agente redator faz a triagem: separa a conversa em trechos e propõe a qual card aberto do projeto cada trecho pertence, usando a lista de cards que ele lê do board. O que ele tem certeza vira proposta de mudança no card. O que é provável ou incerto vira pergunta ao PO no próprio card. O que não bate com card nenhum vira uma pergunta única ao PO, para decidir se é pedido novo ou descarte. Só o PO confirma a atribuição.
+
+Se um card cita uma reunião e nenhuma transcrição entra no canal dentro do prazo, isso vira pendência de quem organizou a reunião, com o mesmo prazo e escalonamento das aprovações. Decisão de reunião sem transcrição não é aceita como fonte.
 
 **4. O que o sistema lê do Figma?**
 Só comentários, só mudanças de tela, ou os dois. E o Figma pode ser fonte de requisito ou só de divergência (a tela mostra algo que o requisito não diz)?

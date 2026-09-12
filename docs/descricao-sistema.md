@@ -36,7 +36,8 @@ O PO e o stakeholder continuam trabalhando onde já trabalham. O Git fica atrás
 
 Dentro do escopo:
 
-- Capturar definições e mudanças de requisito vindas do board, de comentários e de atas de reunião transcrita.
+- Capturar definições e mudanças de requisito vindas do board, de comentários, do Figma e de transcrições de reunião publicadas no chat.
+- Fazer a triagem de uma transcrição de reunião entre os cards abertos do projeto, pedindo confirmação ao PO quando houver dúvida.
 - Transformar cada mudança em uma alteração versionada em um arquivo de requisito, com a fonte de cada afirmação.
 - Pedir e registrar a aprovação de quem tem autoridade sobre a decisão.
 - Manter o card apontando para a versão aprovada do requisito.
@@ -58,7 +59,7 @@ Diagrama de containers, no estilo do C4 Model, e um diagrama de sequência da jo
 
 - Observador de fontes: fica de olho no board, no repositório de requisitos, no figma correspondente e nas conversas/textos compartilhadas. Detecta que algo mudou e entrega para o orquestrador. Não interpreta conteúdo.
 - Orquestrador: guarda o estado de cada requisito (proposto, aguardando aprovação, aprovado, aplicado) e decide o próximo passo. Não fala com modelo de linguagem diretamente.
-- Agente redator: recebe o conteúdo capturado e escreve a proposta de mudança no arquivo de requisito, citando a fonte. É o único que conversa com o modelo de linguagem.
+- Agente redator: recebe o conteúdo capturado e escreve a proposta de mudança no arquivo de requisito, citando a fonte. Faz a triagem de transcrições de reunião: separa a conversa em trechos e propõe a qual card cada trecho pertence, com grau de confiança. O que não tem certeza vira pergunta ao PO. Compara telas do Figma com o requisito. É o único que conversa com o modelo de linguagem.
 - Gateway de modelos: ponto único por onde toda chamada a modelo de linguagem passa. Controla qual modelo é usado, quanto custa e quem pode chamar.
 - Registro de decisões: guarda quem aprovou o quê, quando, por qual canal e com base em qual fonte. É o histórico que responde à pergunta "quem combinou isso".
 - Adaptadores: traduzem o board, o Git e o chat da empresa para uma interface comum. Trocar de ferramenta significa trocar o adaptador, não o sistema.
@@ -70,7 +71,7 @@ Diagrama de containers, no estilo do C4 Model, e um diagrama de sequência da jo
 - Repositório Git do projeto (GitLab, GitHub ou similar): leitura e escrita dos arquivos em `requisitos/`, abertura e aplicação de merge requests de requisito, identificados por prefixo ou label.
 - Chat da empresa (Teams, Slack ou similar): leitura de mensagens em canais compartilhados dedicados a esta integração.
 - Provedores de modelo de linguagem (via gateway): geração dos textos de proposta.
-- Transcrição de reunião: recebida como arquivo ou texto anexado ao card. O sistema não grava reunião.
+- Transcrição de reunião: publicada em um canal do chat compartilhado com o sistema, por uma pessoa ou pela própria ferramenta de reunião. O sistema não grava reunião. Uma reunião sem transcrição não conta como fonte.
 
 ## Restrições
 
@@ -95,3 +96,6 @@ Pontos que ainda não foram decididos. Um agente que for implementar este sistem
 - Quanto de contexto o agente redator recebe. Só a mudança, ou o arquivo inteiro e o histórico.
 - Quais métricas serão expostas e para quem.
 - Projeto com front e back em repositórios separados: em qual deles fica a pasta `requisitos/`.
+- Como o sistema sabe a qual projeto uma transcrição pertence. Provavelmente um canal por projeto.
+- Qual o limite entre "certo" e "provável" na triagem de transcrições, e quantas perguntas o PO aceita receber por reunião.
+- O que fazer com trecho de reunião que menciona um card já fechado.

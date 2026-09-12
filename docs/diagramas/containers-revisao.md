@@ -5,7 +5,7 @@ Gerado com apoio de IA a partir de `descricao-sistema.md` e `esclarecimento.md`.
 ## Suposições adotadas antes do código
 
 1. O Figma não passa pelos adaptadores. Ele é acessado pelo agente redator via MCP, através do gateway, porque quem lê a tela é o modelo, não um serviço comum. Comentários do Figma que viram proposta entram por esse mesmo caminho.
-2. As transcrições de reunião chegam por uma pasta compartilhada consultada periodicamente. Não existe integração direta com ferramenta de reunião.
+2. As transcrições de reunião entram pelo chat, em canal compartilhado, e são triadas pelo agente redator entre os cards abertos do projeto. Não existe integração direta com ferramenta de reunião nem pasta de arquivos.
 3. A configuração por projeto (tabela de autoridade, prazos, ferramentas) vive em arquivos versionados, não em banco. Assim a mudança de regra também tem histórico.
 4. O registro de decisões é um banco relacional separado do Git. O Git guarda o conteúdo do requisito; o banco guarda o ato de aprovar, as pendências e os prazos.
 5. O orquestrador é quem controla prazos e escalonamento, porque ele já guarda o estado de cada requisito. Não existe um serviço separado de "cobrança".
@@ -18,7 +18,7 @@ Gerado com apoio de IA a partir de `descricao-sistema.md` e `esclarecimento.md`.
 Marque o que estiver certo. O que estiver errado, anote ao lado o que deveria ser.
 
 1. [ ] O diagrama está no nível de containers, sem componentes internos nem detalhes de código.
-2. [ ] Todas as integrações externas estão marcadas como externas (board, Git, chat, Figma, provedores, transcrições).
+2. [ ] Todas as integrações externas estão marcadas como externas (board, Git, chat, Figma, provedores).
 3. [ ] Só o agente redator chega ao gateway, e só o gateway chega aos provedores e ao Figma.
 4. [ ] Nenhum container interno tem seta direta para provedor de modelo.
 5. [ ] O orquestrador não fala com modelo de linguagem.
