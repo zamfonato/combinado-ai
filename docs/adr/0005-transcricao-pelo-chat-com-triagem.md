@@ -10,7 +10,7 @@ Muita decisão de requisito nasce em reunião, principalmente entre PO e stakeho
 
 ## Decisão
 
-A transcrição é colada por uma pessoa no canal de chat do projeto. O agente redator recebe a transcrição junto com a lista de cards abertos do projeto e separa a conversa em trechos, propondo a qual card cada trecho pertence, com grau de confiança. Trecho certo vira proposta de requisito no card. Trecho provável vira pergunta ao PO no card. Trecho sem card vira uma pergunta única ao PO: pedido novo ou descarte. Só o PO confirma a atribuição. O requisito nascido da reunião com o stakeholder é aprovado pelo stakeholder. Reunião sem transcrição não conta como fonte, e vira pendência de quem organizou.
+A transcrição é colada por uma pessoa no canal de chat do projeto. Esse canal é um canal comum do Teams ou Slack, criado pela empresa, um por projeto (por exemplo, um canal para o refinamento do projeto X e outro para o projeto Y). A configuração do projeto diz qual canal é o dele, e é assim que o sistema sabe a qual projeto a transcrição pertence. Não existe interface própria; o canal é a interface. O agente redator recebe a transcrição junto com a lista de cards abertos do projeto e separa a conversa em trechos, propondo a qual card cada trecho pertence, com grau de confiança. Trecho certo vira proposta de requisito no card. Trecho provável vira pergunta ao PO no card. Trecho sem card vira uma pergunta única ao PO: pedido novo ou descarte. Só o PO confirma a atribuição. O requisito nascido da reunião com o stakeholder é aprovado pelo stakeholder. Reunião sem transcrição não conta como fonte, e vira pendência de quem organizou.
 
 ## Alternativas consideradas
 
